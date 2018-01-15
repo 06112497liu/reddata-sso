@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<table sqlname="sso_resource" dummypk="id">
+
+	<column name="id" javatype="java.lang.Integer" />
+
+	<!-- 插入一条纪录 -->
+	<operation name="insert">
+		<sql>
+			<![CDATA[
+				INSERT INTO 
+				sso_resource (
+					type, 
+					resource_name, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				)
+				VALUES (?, ?, ?, ?, ?, ?, ?);
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				INSERT INTO 
+				sso_resource (
+					type, 
+					resource_name, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				)
+				VALUES (#type#, #resourceName#, #isEnable#, #description#, #lastModifier#, now(), now());
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 删除一条纪录 -->
+	<operation name="delete">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_resource
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_resource
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 更新一条纪录 -->
+	<operation name="update" paramtype="object">
+		<sql>
+			<![CDATA[
+				UPDATE 
+					sso_resource
+				SET
+					type = ?, 
+					resource_name = ?, 
+					is_enable = ?, 
+					description = ?, 
+					last_modifier = ?, 
+					gmt_modified = ?
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				UPDATE 
+					sso_resource
+				SET
+					type = #type#, 
+					resource_name = #resourceName#, 
+					is_enable = #isEnable#, 
+					description = #description#, 
+					last_modifier = #lastModifier#, 
+					gmt_modified = now()
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 查询一条纪录 -->
+	<operation name="query">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					type, 
+					resource_name, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_resource
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					type, 
+					resource_name, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_resource
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过resourceName查询，查询结果为列表 -->
+	<operation name="queryByResourceName">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					type, 
+					resource_name, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_resource
+				WHERE 
+					resource_name = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					type, 
+					resource_name, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_resource
+				WHERE 
+					resource_name = #resourceName#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 模糊查询 -->
+	<operation name="queryByAuthName" multiplicity="many">
+		<extraparams>
+			<param name="authName" javatype="java.lang.String"/>
+		</extraparams>
+		<sql>
+			<![CDATA[
+				SELECT
+					b.id as id,
+					b.type as type,
+					b.resource_name as resource_name,
+					b.is_enable as is_enable,
+					b.last_modifier as last_modifier,
+					c.description as description,
+					b.gmt_create as gmt_create,
+					b.gmt_modified as gmt_modified
+				FROM
+					sso_auth a,
+					sso_resource b,
+					sso_auth_resource c 
+				WHERE
+					a.id = c.auth_id 
+				AND 
+					b.id = c.resource_id 
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT
+					b.id as id,
+					b.type as type,
+					b.resource_name as resource_name,
+					b.is_enable as is_enable,
+					b.last_modifier as last_modifier,
+					c.description as description,
+					b.gmt_create as gmt_create,
+					b.gmt_modified as gmt_modified
+				FROM
+					sso_auth a,
+					sso_resource b,
+					sso_auth_resource c 
+				WHERE
+					a.id = c.auth_id 
+				AND 
+					b.id = c.resource_id 
+				AND
+					a.auth_name = #authName# 
+				ORDER BY 
+					c.gmt_modified DESC 
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 按照备注来删除纪录，仅用于测试用例中 -->
+	<operation name="deleteByDesc">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_resource
+				WHERE 
+					description like ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_resource
+				WHERE 
+					description like 
+				CONCAT(CONCAT('%', #description#), '%');
+			]]>
+		</sqlmap>
+	</operation>
+
+</table>

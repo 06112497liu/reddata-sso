@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+	default-autowire="byName">
+	<context:property-placeholder location="classpath*:*.properties"/>
+	<!-- get the config from klconfigcenter -->
+	<!-- expose dubbo rpc service -->
+	<dubbo:application name="${app_name}" owner="${app_owner}" />
+	<dubbo:registry address="${app_registry}" />
+	<dubbo:protocol name="${app_protocol}" port="${app_protocol_port}" id="dubbo_protocol"/>
+	<dubbo:monitor protocol="${app_monitor}" />
+
+	<!-- expose rest rpc service -->
+	<dubbo:protocol name="${rest_protocol_name}" server="${rest_protocol_server}"
+		port="${rest_protocol_port}" id="rest_protocol"   />
+		
+	<!-- 用户管理服务 -->
+	<dubbo:service interface="com.bbd.bdsso.common.service.facade.SsoUserFacade"
+		ref="ssoUserFacade" protocol="rest_protocol,dubbo_protocol" />
+		
+	<!-- 用户token服务 -->
+	<dubbo:service interface="com.bbd.bdsso.common.service.facade.SsoAccessFacade"
+		ref="ssoAccessFacade" protocol="rest_protocol,dubbo_protocol" />
+		
+	<!-- 用户验证服务 -->
+	<dubbo:service interface="com.bbd.bdsso.common.service.facade.SsoAccountValidFacade"
+		ref="ssoAccountValidFacade" protocol="rest_protocol,dubbo_protocol" />
+		
+	<!-- 应用管理服务 -->
+	<dubbo:service interface="com.bbd.bdsso.common.service.facade.SsoAppFacade"
+		ref="ssoAppFacade" protocol="rest_protocol,dubbo_protocol" />
+		
+	<!-- 用户权限服务 -->
+	<dubbo:service interface="com.bbd.bdsso.common.service.facade.SsoAuthFacade"
+		ref="ssoAuthFacade" protocol="rest_protocol,dubbo_protocol" />
+		
+	<!-- 用户角色服务 -->
+	<dubbo:service interface="com.bbd.bdsso.common.service.facade.SsoRoleFacade"
+		ref="ssoRoleFacade" protocol="rest_protocol,dubbo_protocol" />
+		
+	<!-- 角色权限服务 -->
+	<dubbo:service interface="com.bbd.bdsso.common.service.facade.SsoRoleAuthFacade"
+		ref="ssoRoleAuthFacade" protocol="rest_protocol,dubbo_protocol" />
+		
+	<!-- 用户角色服务 -->
+	<dubbo:service interface="com.bbd.bdsso.common.service.facade.SsoUserRoleFacade"
+		ref="ssoUserRoleFacade" protocol="rest_protocol,dubbo_protocol" />
+		
+	<!-- 用户访问记录服务 -->
+	<dubbo:service interface="com.bbd.bdsso.common.service.facade.SsoVisitHistoryFacade"
+		ref="ssoVisitHistoryFacade" protocol="rest_protocol,dubbo_protocol" />
+		
+	<!-- 资源管理服务 -->
+	<dubbo:service interface="com.bbd.bdsso.common.service.facade.SsoResourceFacade"
+		ref="ssoResourceFacade" protocol="rest_protocol,dubbo_protocol" />
+	
+	<!-- 权限资源管理服务 -->
+	<dubbo:service interface="com.bbd.bdsso.common.service.facade.SsoAuthResourceFacade"
+		ref="ssoAuthResourceFacade" protocol="rest_protocol,dubbo_protocol" />
+
+	<!-- 数据字典服务 -->
+	<dubbo:service interface="com.bbd.bdsso.common.service.facade.SsoDataDictionaryFacade"
+				   ref="ssoDataDictionaryFacade" protocol="rest_protocol,dubbo_protocol" />
+</beans>
+

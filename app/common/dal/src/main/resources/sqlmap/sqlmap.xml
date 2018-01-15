@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+    <settings cacheModelsEnabled="true" enhancementEnabled="false" lazyLoadingEnabled="false" maxRequests="3000" maxSessions="3000" maxTransactions="3000" useStatementNamespaces="false"/>
+    <sqlMap resource="sqlmap/SsoAccess-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/SsoAccountValid-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/SsoApp-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/SsoAuth-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/SsoAuthResource-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/SsoCacheManager-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/SsoDataDictionary-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/SsoResource-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/SsoRole-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/SsoRoleAuth-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/SsoUser-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/SsoUserInfo-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/SsoUserRole-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/SsoVisitHistory-sqlmap-mapping.xml"/>
+</sqlMapConfig>

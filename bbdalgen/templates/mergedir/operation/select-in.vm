@@ -1,0 +1,64 @@
+	  //�жϿ����Ƿ�
+  	  if (this.getPower() == false) {
+  		//ֱ�Ӵ�ԭ�ֶ�ȡֵ
+  		return (${operation.simpleReturnType})getSqlMapClientTemplate().queryForList("${operation.mappedStatementId}", ${paramName});
+  	  }
+  	    //�����ؿ�ʱ�������ֶ�ȡ��ֵ
+		${table.DOClassName} opDO = new ${table.DOClassName}();
+		
+		${operation.simpleReturnType} tempValue = (${operation.simpleReturnType})getSqlMapClientTemplate().queryForList("${operation.mappedStatementId}", ${paramName});
+		
+		if (CollectionUtils.isEmpty(tempValue)){
+		    return tempValue;
+		}
+		
+#if(${table.getTableConfig().bIntegrity()} == true)
+	    for (int i = 0 ; i < tempValue.size(); i++) {
+			opDO = tempValue.get(i);
+		    //���������ԱȽϷ���
+		    methodUtils.compareInteg(opDO);
+		   }
+#end
+		//���ڻ����Ժ������ԣ������㷨��ͬ�����Էֿ�����
+		${operation.simpleReturnType} temp = new ArrayList<${table.DOClassName}>();
+		for (int i = 0 ; i < tempValue.size(); i++) {
+		    opDO = tempValue.get(i);
+#if(${table.getTableConfig().bConfidentiality()} == true)
+		  //��ñ������Ļ������ֶ�
+		  String conf = opDO.get$!{method_getConf}();
+		  if (conf == null) {
+		    logger.warn("���ݿ��иû������ֶ�Ϊ��");
+			temp.add(opDO);
+			continue;
+		  }
+		  //ȡ�ü����ֶ�ֵ
+		  int encodeStart = StringUtil.indexOfAny(conf,"@");
+		  String tempEncodeValue = StringUtil.substring(conf,0,encodeStart);
+		  //ȡ��keyname��version
+		  int versionStart = StringUtil.indexOfAny(conf,"#");
+		  String keyname = StringUtil.substring(conf,encodeStart+1,versionStart);
+		  int versionFromDB = Integer.parseInt(StringUtil.substring(conf,versionStart + 1,conf.length()));
+		   //��Ҫ���ܵ����Ľ���Base64����
+		  byte[] encodeValueBytes = Base64.decode(tempEncodeValue);
+		  //��ȡ�����Ļ������ֶ�������
+		  //ȡ��Կ
+		  KmiResult keyData = methodUtils.getKmiResultConf(keyname,appName,versionFromDB);
+		  //�����ֶν���Base64����
+		  byte[] bytes = Base64.decode(keyData.getKeyData()); 
+		  //����
+		  byte[] resultBytes = null;
+		  String bytesToString = null;
+		  try {
+			resultBytes = SymmtricCryptoUtil.symmtricCrypto(encodeValueBytes, bytes, "AES", Cipher.DECRYPT_MODE);
+			//�����ܺ������ת��ΪString����
+		    bytesToString = new String(resultBytes);
+		  } catch (GeneralSecurityException e) {
+			logger.error("���ܴ���");
+			 throw new RuntimeException("���ݻ����Խ��ܳ���",e);
+		  }
+		  
+		  
+		  ##//��ò�ѯ���
+		   ##temp = (${operation.simpleReturnType})getSqlMapClientTemplate().queryForList("${operation.mappedStatementId}", ${paramName});
+          
+#end      

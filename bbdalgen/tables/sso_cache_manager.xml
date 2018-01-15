@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<table sqlname="sso_cache_manager" dummypk="id">
+
+	<column name="id" javatype="java.lang.Integer" />
+
+	<!-- 插入一条纪录 -->
+	<operation name="insert">
+		<sql>
+			<![CDATA[
+				INSERT INTO 
+				sso_cache_manager (
+					cache_name, 
+					server_host, 
+					server_ip, 
+					status, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				)
+				VALUES (?, ?, ?, ?, ?, ?, ?);
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				INSERT INTO 
+				sso_cache_manager (
+					cache_name, 
+					server_host, 
+					server_ip, 
+					status, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				)
+				VALUES (#cacheName#, #serverHost#, #serverIp#, #status#, #description#, now(), now());
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过cacheName来查找一条记录 -->
+	<operation name="queryByCacheName">
+		<sql>
+			<![CDATA[
+				SELECT
+					id, 
+					cache_name, 
+					server_host, 
+					server_ip, 
+					status, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM 
+					sso_cache_manager
+				WHERE
+					cache_name = ?
+				AND
+					server_host = ?
+				AND
+					server_ip = ?
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT
+					id, 
+					cache_name, 
+					server_host, 
+					server_ip, 
+					status, 
+					description, 
+					gmt_create, 
+					gmt_modified 
+				FROM 
+					sso_cache_manager
+				WHERE
+					cache_name = #cacheName# 
+				AND
+					server_host = #serverHost#
+				AND
+					server_ip = #serverIp#
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过status来查找一条记录 -->
+	<operation name="queryByStatus">
+		<sql>
+			<![CDATA[
+				SELECT
+					id, 
+					cache_name, 
+					server_host, 
+					server_ip, 
+					status, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM 
+					sso_cache_manager
+				WHERE
+					status = ?
+				AND
+					server_host = ?
+				AND
+					server_ip = ?
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT
+					id, 
+					cache_name, 
+					server_host, 
+					server_ip, 
+					status, 
+					description, 
+					gmt_create, 
+					gmt_modified 
+				FROM 
+					sso_cache_manager
+				WHERE
+					status = #status# 
+				AND
+					server_host = #serverHost#
+				AND
+					server_ip = #serverIp#
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 更新一条纪录 -->
+	<operation name="updateById">
+		<sql>
+			<![CDATA[
+				UPDATE
+					sso_cache_manager
+				SET
+					status = ?
+				WHERE
+					id = ?
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				UPDATE
+					sso_cache_manager
+				SET
+					status = #status#
+				WHERE
+					id = #id#
+				AND
+					gmt_modified = now()
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过cacheName来更新对应记录的status信息 -->
+	<operation name="updateStatusByName">
+		<sql>
+			<![CDATA[
+				UPDATE
+					sso_cache_manager
+				SET
+					status = ?
+				WHERE
+					cache_name = ?
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				UPDATE
+					sso_cache_manager
+				SET
+					status = #status#
+				WHERE
+					cache_name = #cacheName# 
+				AND
+					gmt_modified = now()
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 按照备注来删除纪录，仅用于测试用例中 -->
+	<operation name="deleteByDesc">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_cache_manager
+				WHERE 
+					description like ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_cache_manager
+				WHERE 
+					description like 
+				CONCAT(CONCAT('%', #description#), '%');
+			]]>
+		</sqlmap>
+	</operation>
+
+</table>

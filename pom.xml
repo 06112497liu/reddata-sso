@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.bbd.reddata-sso</groupId>
+	<artifactId>bdsso</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>BBD bdsso</name>
+	<description>bdsso is built by bdrf core</description>
+
+	<!-- properties -->
+	<properties>
+		<!-- bdsso facade -->
+		<bdsso_facade_version>1.0-SNAPSHOT</bdsso_facade_version>
+		<!-- bdsso -->
+		<bdsso_version>1.0-SNAPSHOT</bdsso_version>
+		<spring_version>3.2.9.RELEASE</spring_version>
+		<jboss_version>3.0.7.Final</jboss_version>
+		<tomcat_embed_version>8.0.11</tomcat_embed_version>
+		<cxf_version>2.6.1</cxf_version>
+		<jackson_version>2.5.4</jackson_version>
+		<servlet_version>3.0.1</servlet_version>
+		<jetty_version>6.1.26</jetty_version>
+		<fst_version>1.55</fst_version>
+		<validation_api_version>1.0.0.GA</validation_api_version>
+		<dubbo_version>3.0.0</dubbo_version>
+		<aspectj_version>1.5.3</aspectj_version>
+		<zookeeper_version>3.4.6</zookeeper_version>
+		<zkclient_version>0.3</zkclient_version>
+		<slf4j_version>1.6.2</slf4j_version>
+		<log4j_version>1.2.16</log4j_version>
+		<mysql_version>5.1.13</mysql_version>
+		<ibatis_version>2.3.4.726</ibatis_version>
+		<dbcp_version>1.2.1</dbcp_version>
+		<json_version>2.4</json_version>
+		<ezmorph_version>1.0.6</ezmorph_version>
+		<junit_version>4.11</junit_version>
+		<mockito_version>1.9.5</mockito_version>
+		<commons_lang_version>2.6</commons_lang_version>
+		<commons_io_version>2.1</commons_io_version>
+		<commons_digester_version>2.1</commons_digester_version>
+		<commons_collections_version>3.2.2</commons_collections_version>
+		<kafka_version>0.8.2.2</kafka_version>
+		<javassist_version>3.18.1-GA</javassist_version>
+		<testng_version>6.8</testng_version>
+		<bbd_commons_lang>1.0.0</bbd_commons_lang>
+		<velocity_version>1.7</velocity_version>
+		<javax_mail_version>1.5.6</javax_mail_version>
+		<skipTests>true</skipTests>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- bbd-commons-lang -->
+			<dependency>
+				<groupId>com.bbd.commons</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${bbd_commons_lang}</version>
+			</dependency>
+
+			<!-- sub projects start -->
+			<dependency>
+				<groupId>com.bbd.reddata-sso</groupId>
+				<artifactId>bdsso-biz-shared</artifactId>
+				<version>${bdsso_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bbd.reddata-sso</groupId>
+				<artifactId>bdsso-biz-service-impl</artifactId>
+				<version>${bdsso_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bbd.reddata-sso</groupId>
+				<artifactId>bdsso-core-service</artifactId>
+				<version>${bdsso_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bbd.reddata-sso</groupId>
+				<artifactId>bdsso-core-model</artifactId>
+				<version>${bdsso_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bbd.reddata-sso</groupId>
+				<artifactId>bdsso-common-service-integration</artifactId>
+				<version>${bdsso_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bbd.reddata-sso</groupId>
+				<artifactId>bdsso-common-util</artifactId>
+				<version>${bdsso_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bbd.reddata-sso</groupId>
+				<artifactId>bdsso-common-dal</artifactId>
+				<version>${bdsso_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.bbd.reddata-sso</groupId>
+				<artifactId>bdsso-common-service-facade</artifactId>
+				<version>${bdsso_facade_version}</version>
+			</dependency>
+			<!--
+			<dependency>
+				<groupId>com.bbd.bdsso</groupId>
+				<artifactId>bdsso-test</artifactId>
+				<version>${bdsso_version}</version>
+			</dependency>
+			-->
+			<!-- sub projects end -->
+
+			<!-- spring start -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>${spring_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${spring_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${spring_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring_version}</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- spring end -->
+
+			<!-- kafka start -->
+			<dependency>
+				<groupId>org.apache.kafka</groupId>
+				<artifactId>kafka_2.10</artifactId>
+				<version>${kafka_version}</version>
+			</dependency>
+			<!-- kafka end -->
+
+			<!-- jboss start -->
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jaxrs</artifactId>
+				<version>${jboss_version}</version>
+			</dependency>
+			<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-client</artifactId>
+				<version>${jboss_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${validation_api_version}</version>
+			</dependency>
+			<!-- xml serialize -->
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jackson-provider</artifactId>
+				<version>${jboss_version}</version>
+			</dependency>
+			<!-- json serialize -->
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jaxb-provider</artifactId>
+				<version>${jboss_version}</version>
+			</dependency>
+			<!-- netty server -->
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-netty</artifactId>
+				<version>${jboss_version}</version>
+			</dependency>
+			<!-- Sun HTTP server -->
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jdk-http</artifactId>
+				<version>${jboss_version}</version>
+			</dependency>
+			<!-- upload files -->
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-multipart-provider</artifactId>
+				<version>${jboss_version}</version>
+			</dependency>
+			<!-- tomcat server -->
+			<dependency>
+				<groupId>org.apache.tomcat.embed</groupId>
+				<artifactId>tomcat-embed-core</artifactId>
+				<version>${tomcat_embed_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat.embed</groupId>
+				<artifactId>tomcat-embed-logging-juli</artifactId>
+				<version>${tomcat_embed_version}</version>
+			</dependency>
+			<!-- fst serialize -->
+			<dependency>
+				<groupId>de.ruedigermoeller</groupId>
+				<artifactId>fst</artifactId>
+				<version>${fst_version}</version>
+			</dependency>
+			<!-- jackson serialize -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson_version}</version>
+			</dependency>
+			<!-- jboss end -->
+
+			<!-- servlet start -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${servlet_version}</version>
+			</dependency>
+			<!-- servlet end -->
+
+			<!-- jetty start -->
+			<dependency>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty</artifactId>
+				<version>${jetty_version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.mortbay.jetty</groupId>
+						<artifactId>servlet-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<!-- rpc start -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>dubbo</artifactId>
+				<version>${dubbo_version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- rpc end -->
+
+			<!-- aspectj start -->
+			<dependency>
+				<groupId>aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${aspectj_version}</version>
+			</dependency>
+			<!-- aspectj end -->
+
+			<!-- zookeeper start -->
+			<dependency>
+				<groupId>org.apache.zookeeper</groupId>
+				<artifactId>zookeeper</artifactId>
+				<version>${zookeeper_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.101tec</groupId>
+				<artifactId>zkclient</artifactId>
+				<version>${zkclient_version}</version>
+			</dependency>
+			<!-- zookeeper end -->
+
+			<!-- log start -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j_version}</version>
+			</dependency>
+			<!-- log end -->
+
+			<!-- data start -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.ibatis</groupId>
+				<artifactId>ibatis-sqlmap</artifactId>
+				<version>${ibatis_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>${dbcp_version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>xml-apis</groupId>
+						<artifactId>xml-apis</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>xerces</groupId>
+						<artifactId>xercesImpl</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.json-lib</groupId>
+				<artifactId>json-lib</artifactId>
+				<version>${json_version}</version>
+				<classifier>jdk15</classifier>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.ezmorph</groupId>
+				<artifactId>ezmorph</artifactId>
+				<version>${ezmorph_version}</version>
+			</dependency>
+			<!-- data end -->
+
+			<!-- test start -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit_version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${mockito_version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.testng</groupId>
+				<artifactId>testng</artifactId>
+				<version>${testng_version}</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- test end -->
+
+			<!-- common-lang start -->
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${commons_lang_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons_io_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-digester</groupId>
+				<artifactId>commons-digester</artifactId>
+				<version>${commons_digester_version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>${commons_collections_version}</version>
+			</dependency>
+			<!-- common-lang end -->
+
+			<!-- javassist -->
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>${javassist_version}</version>
+			</dependency>
+
+			<!-- email-->
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity</artifactId>
+				<version>${velocity_version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.sun.mail</groupId>
+				<artifactId>javax.mail</artifactId>
+				<version>${javax_mail_version}</version>
+			</dependency>
+			
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- project build -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>InternalSnapshots</id>
+			<url>http://nexus.bbdops.com/nexus/content/repositories/snapshots/</url>
+		</repository>
+	</distributionManagement>
+
+	<!-- modules -->
+  <modules>
+    <module>app/biz/shared</module>
+    <module>app/biz/service-impl</module>
+    <module>app/core/service</module>
+    <module>app/core/model</module>
+    <module>app/common/util</module>
+    <module>app/common/service/facade</module>
+    <module>app/common/service/integration</module>
+    <module>app/common/dal</module>
+    <module>app/test</module>
+    <module>assembly</module>
+  </modules>
+</project>

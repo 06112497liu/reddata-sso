@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+	default-autowire="byName">
+
+	<!-- SSO用户管理服务 -->
+	<bean id="ssoUserService" class="com.bbd.bdsso.core.service.impl.SsoUserServiceImpl" />
+
+	<!-- SSO数据字典管理服务 -->
+	<bean id="SsoDataDictionaryService" class="com.bbd.bdsso.core.service.impl.SsoDataDictionaryServiceImpl" />
+
+	<!-- SSO用户token管理服务 -->
+	<bean id="ssoAccessService" class="com.bbd.bdsso.core.service.impl.SsoAccessServiceImpl" />
+
+	<!-- SSO邮件服务 -->
+	<bean id="ssoEmailService" class="com.bbd.bdsso.core.service.impl.SsoEmailServiceImpl" />
+
+	<!-- SSO邮件服务 -->
+	<bean id="ssoEncryptService" class="com.bbd.bdsso.core.service.impl.SsoEncryptServiceImpl" />
+	
+	<!-- SSO资源服务 -->
+	<bean id="ssoResourceService" class="com.bbd.bdsso.core.service.impl.SsoResourceServiceImpl" />	
+
+	<!-- SSO文件服务 -->
+	<bean id="ssoFileService" class="com.bbd.bdsso.core.service.impl.SsoFileServiceImpl">
+		<property name="fileSystemRootPath">
+			<value>${fileSystemRootPath}</value>
+		</property>
+		<property name="hostAndPort">
+			<value>${hostAndPort}</value>
+		</property>
+	</bean>
+
+	<!-- 邮件初始化 -->
+	<bean id="mailSenderInfo" class="com.bbd.bdsso.common.util.email.MailSenderInfo">
+		<constructor-arg name="mailServerHost">
+			<value>${mailServerHost}</value>
+		</constructor-arg>
+		<constructor-arg name="mailServerPort">
+			<value>${mailServerPort}</value>
+		</constructor-arg>
+		<constructor-arg name="fromAddress">
+			<value>${fromAddress}</value>
+		</constructor-arg>
+		<constructor-arg name="userName">
+			<value>${mailUserName}</value>
+		</constructor-arg>
+		<constructor-arg name="password">
+			<value>${mailPassword}</value>
+		</constructor-arg>
+	</bean>
+
+	<!-- 邮件验证模型 -->
+	<bean id="emailValidateModel" class="com.bbd.bdsso.core.model.EmailValidateModel">
+		<property name="emailEegularExp">
+			<value>${emailEegularExp}</value>
+		</property>
+	</bean>
+
+</beans>

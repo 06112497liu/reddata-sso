@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<table sqlname="sso_user" dummypk="id">
+
+	<column name="id" javatype="java.lang.Integer" />
+	<column name="is_enable" javatype="java.lang.Integer" />
+
+	<!-- 插入一条纪录 -->
+	<operation name="insert">
+		<sql>
+			<![CDATA[
+				INSERT INTO 
+				sso_user (
+					user_name, 
+					user_password, 
+					email, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				)
+				VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				INSERT INTO 
+				sso_user (
+					user_name, 
+					user_password, 
+					email, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				)
+				VALUES (#userName#, #userPassword#, #email#, #isEnable#, #description#, #lastModifier#, now(), now());
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 删除一条纪录 -->
+	<operation name="delete">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_user
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_user
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 更新一条纪录 -->
+	<operation name="update">
+		<sql>
+			<![CDATA[
+				UPDATE 
+					sso_user
+				SET
+					is_enable = ?, 
+					description = ?, 
+					last_modifier = ?
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				UPDATE 
+					sso_user
+				SET
+					is_enable = #isEnable#, 
+					description = #description#, 
+					last_modifier = #lastModifier#, 
+					gmt_modified = now()
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 更新一条纪录 -->
+	<operation name="updateByPsw">
+		<sql>
+			<![CDATA[
+				UPDATE 
+					sso_user
+				SET
+					user_password = ?
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				UPDATE 
+					sso_user
+				SET
+					user_password = #userPassword#, 
+					gmt_modified = now()
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 更新一条纪录 -->
+	<operation name="updateByEmail">
+		<sql>
+			<![CDATA[
+				UPDATE 
+					sso_user
+				SET
+					user_password = ?, 
+					gmt_modified = ?
+				WHERE 
+					email = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				UPDATE 
+					sso_user
+				SET
+					user_password = #userPassword#, 
+					gmt_modified = now()
+				WHERE 
+					email = #email#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 查询一条纪录 -->
+	<operation name="query">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_name,
+					user_password, 
+					email, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_user
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_name,
+					user_password, 
+					email, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_user
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 查询全部用户-->
+	<operation name="queryAll" multiplicity="many">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_name,
+					user_password, 
+					email, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_user;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_name,
+					user_password, 
+					email, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_user;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 根据用户名来查找 -->
+	<operation name="queryByName">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_name,
+					user_password, 
+					email, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_user
+				WHERE 
+					user_name = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_name,
+					user_password, 
+					email, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_user
+				WHERE 
+					user_name = #userName#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 根据邮箱来查找 -->
+	<operation name="queryByEmail">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_name,
+					user_password, 
+					email, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_user
+				WHERE 
+					email = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_name,
+					user_password, 
+					email, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_user
+				WHERE 
+					email = #email#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过用户名来验证 -->
+	<operation name="loginByUserName">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_name,
+					user_password, 
+					email, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_user
+				WHERE 
+					user_name = ?
+				AND
+					user_password = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_name,
+					user_password, 
+					email, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_user
+				WHERE 
+					user_name = #userName#
+				AND
+					user_password = #userPassword#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过邮件来验证 -->
+	<operation name="loginByEmail">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_name,
+					user_password, 
+					email, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_user
+				WHERE 
+					email = ?
+				AND
+					user_password = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_name,
+					user_password, 
+					email, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_user
+				WHERE 
+					email = #userName#
+				AND
+					user_password = #userPassword#;
+			]]>
+		</sqlmap>
+	</operation>
+
+<!-- 总人数 -->
+	<operation name="queryTotalUser">
+		<sql>
+			<![CDATA[
+				SELECT 
+					count(*)
+				FROM
+					sso_user
+				WHERE 
+					is_enable = 1
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					count(*)
+				FROM
+					sso_user
+				WHERE 
+					is_enable = 1
+			]]>
+		</sqlmap>
+	</operation>
+
+
+	<!-- 按照备注来删除纪录，仅用于测试用例中 -->
+	<operation name="deleteByDesc">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_user
+				WHERE 
+					description like ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_user
+				WHERE 
+					description like 
+				CONCAT(CONCAT('%', #description#), '%');
+			]]>
+		</sqlmap>
+	</operation>
+
+</table>

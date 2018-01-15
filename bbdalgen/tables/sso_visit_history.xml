@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<table sqlname="sso_visit_history" dummypk="id">
+
+	<column name="id" javatype="java.lang.Integer" />
+	<column name="user_id" javatype="java.lang.Integer" />
+
+	<!-- 插入一条纪录 -->
+	<operation name="insert">
+		<sql>
+			<![CDATA[
+				INSERT INTO 
+				sso_visit_history (
+					user_id, 
+					last_login_date, 
+					last_login_ip, 
+					description,
+					gmt_create, 
+					gmt_modified
+				)
+				VALUES (?, ?, ?, ?, ?, ?);
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				INSERT INTO 
+				sso_visit_history (
+					user_id, 
+					last_login_date, 
+					last_login_ip, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				)
+				VALUES (#userId#, #lastLoginDate#, #lastLoginIp#, #description#, now(), now());
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 删除一条纪录 -->
+	<operation name="delete">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_visit_history
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_visit_history
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 更新一条纪录 -->
+	<operation name="update" paramtype="object">
+		<sql>
+			<![CDATA[
+				UPDATE 
+					sso_visit_history
+				SET
+					user_id = ?, 
+					last_login_date = ?, 
+					last_login_ip = ?, 
+					description = ?,
+					gmt_modified = ?
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				UPDATE 
+					sso_visit_history
+				SET
+					user_id = #userId#, 
+					last_login_date = #lastLoginDate#, 
+					last_login_ip = #lastLoginIp#, 
+					description = #description#, 
+					gmt_modified = now()
+				WHERE 
+					id = ?;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 查询一条纪录 -->
+	<operation name="query">
+		<sql>
+			<![CDATA[
+				SELECT
+					id, 
+					user_id, 
+					last_login_date, 
+					last_login_ip, 
+					description,
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_visit_history
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					last_login_date, 
+					last_login_ip, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_visit_history
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 根据用户名来查找，查询结果为列表 -->
+	<operation name="queryByUserId" multiplicity="many">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					last_login_date, 
+					last_login_ip, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_visit_history
+				WHERE 
+					user_id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					last_login_date, 
+					last_login_ip, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_visit_history
+				WHERE 
+					user_id = #userId#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 按照备注来删除纪录，仅用于测试用例中 -->
+	<operation name="deleteByDesc">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_visit_history
+				WHERE 
+					description like ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_visit_history
+				WHERE 
+					description like 
+				CONCAT(CONCAT('%', #description#), '%');
+			]]>
+		</sqlmap>
+	</operation>
+
+</table>

@@ -1,0 +1,34 @@
+##operation.getAllField�������������Ƿ���select *��ʽ 
+#if(${operation.getAllField()} < 0)
+##operation.getField����С��0ʱ��˵����ѯ���ֶ�ֻ��һ��
+#if(${operation.getField()} < 0) 
+##������һ���ֶε�ʱ��Ҫ���Ǹ��ֶεķ���ֵ����
+#if (${operation.returnTypePrimitive})
+	 ##���õ���String���͵���ֵת�ɻ���������������Ӧ��������������
+${operation.simpleReturnTypeForPrimitive} retObj = new ${operation.simpleReturnTypeForPrimitive}(finalStringValue);
+	 ##ת�ɻ�����������
+	 return retObj.${operation.simpleReturnType}Value();
+		
+#else
+	   
+         return finalStringValue;
+
+#end 
+#else
+#if(${table.getTableConfig().bConfidentiality()} == true)
+##parse ("operation/dynamic-extends.vm")
+       opDO.set$!{finalRet}(bytesToString);
+          return opDO;
+#else 
+        return (${operation.simpleReturnType}) getSqlMapClientTemplate().queryForObject("${operation.mappedStatementId}", ${paramName});
+#end
+#end
+#else
+	 #if(${table.getTableConfig().bConfidentiality()} == true)
+##parse ("operation/dynamic-extends.vm")
+        opDO.set$!{finalRet}(bytesToString);
+          return opDO;
+#else 
+        return (${operation.simpleReturnType}) getSqlMapClientTemplate().queryForObject("${operation.mappedStatementId}", ${paramName});
+#end
+#end

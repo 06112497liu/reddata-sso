@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>com.bbd.reddata-sso</groupId>
+		<artifactId>bdsso</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../../../../pom.xml</relativePath>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.bbd.reddata-sso</groupId>
+	<artifactId>bdsso-common-service-facade</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<name>BBD bdsso-common-service-facade</name>
+	<description>bdsso is built by bdrf core</description>
+	<url>http://www.bbdservice.com/</url>
+
+	<packaging>jar</packaging>
+
+	<dependencies>
+
+		<!-- lib depends -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-multipart-provider</artifactId>
+		</dependency>
+
+	</dependencies>
+</project>

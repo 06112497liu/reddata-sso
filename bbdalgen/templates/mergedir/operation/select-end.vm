@@ -1,0 +1,35 @@
+#if(${operation.getAllField()} < 0) ##������select *��ʱ��
+#if(${operation.getField()} < 0)  ##����select XX from tableNameʱ
+      //�����ܺ���ֶη����ѯʱ���˱����Ե��ֶ�
+	    temp.add(finalStringValue);
+		 }
+	    return temp;
+	
+#else 
+#if(${table.getTableConfig().bConfidentiality()} == true)
+##parse ("operation/dynamic-extends.vm")
+          opDO.set$!{finalRet}(bytesToString);
+          temp.add(opDO);
+		  }
+          return temp;
+		  
+#else
+           }
+          return getSqlMapClientTemplate().queryForList("${operation.mappedStatementId}", ${paramName});
+		  
+#end
+#end
+#else
+#if(${table.getTableConfig().bConfidentiality()} == true)
+##parse ("operation/dynamic-extends.vm")
+          opDO.set$!{finalRet}(bytesToString);
+          temp.add(opDO);
+		  }
+          return temp;
+	
+#else
+            }
+          return getSqlMapClientTemplate().queryForList("${operation.mappedStatementId}", ${paramName});
+		 
+#end
+#end

@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html">
+<style>
+body{font-size:14px;line-height:1.5;padding:8px 10px;margin:0;}
+pre {
+	white-space: pre-wrap; 
+	white-space: -moz-pre-wrap; 
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap: break-word;
+	font-family:'';
+}
+.rm_line{border-top:2px solid #F1F1F1; font-size:0; margin:15px 0}
+.atchImg img{border:2px solid #c3d9ff;}
+.lnkTxt{color:#0066CC;font-size:12px}
+.rm_PicArea *{ font-family:Arial, sans-serif; font-size:14px;font-weight:700;}
+.fbk3{ color:#333; line-height:160%}
+.fTip{ font-size:11px; font-weight:normal}
+body,td,pre{font-family:Arial, Verdana, sans-serif}
+</style>
+</head>
+<body>
+<style>body { line-height: 1.5; }blockquote { margin-top: 0px; margin-bottom: 0px; margin-left: 0.5em; }p { margin-top: 0px; margin-bottom: 0px; }div.foxdiv20150710180005046894 { }body { font-size: 10.5pt; font-family: 'Microsoft YaHei UI'; color: rgb(0, 0, 0); line-height: 1.5; }
+</style>
+
+<div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="华文细黑">尊敬的$!{email}：</font>
+</div> 
+<div><br></div>
+<div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="华文细黑">您的验证码为：$!{verifyCode}，有效期：$!{duration}分钟。</font></div>
+<div><br></div>
+<div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="华文细黑">BBD SSO（单点登录平台）</font></div>
+<div><br></div>
+</html>
+<hr style="width: 210px; height: 1px;" color="#b5c4df" size="1" align="left">
+<p style="line-height: 21px; font-family: 微软雅黑;">
+<font face="华文细黑">数联铭品</font><br>
+the data behind decision&nbsp;<br>
+www.bbdservice.com<br>
+<font face="华文细黑">成都 . 北京 . 上海 . 香港 . 纽约 . 新加坡&nbsp;<br>
+成都市高新区天府大道中段199号棕榈泉国际金融中心21楼 </font>&nbsp;<br>
+<font face="华文细黑">电话</font>&nbsp;(Tel.)：+86 （28）6529 0823&nbsp;<br>
+<font face="华文细黑">传真</font>&nbsp;(Fax.)：+86 （28）6500 9391&nbsp;<br>
+<font face="华文细黑">电子邮件</font>&nbsp;(Email)：service@bbdservice.com<br>
+<font face="华文细黑">成都数联铭品科技有限公司邮件法律声明：</font><br>
+<font face="华文细黑">本邮件所有信息及附件内容版权、知识产权归我公司所有，未经事先书面许可，禁止复制、转载、传播、储存。</font><br>
+<font face="华文细黑">BRANDBIGDATA TECH. CO., LTD. EMAIL NOTICE:</font><br>
+<font face="华文细黑">The information and any attachments contained in this email is all copyright and intellectual property of our company reserved. Without prior written permission of any copy, reproduce, propagation or storage will be prohibited.</font>
+</p>

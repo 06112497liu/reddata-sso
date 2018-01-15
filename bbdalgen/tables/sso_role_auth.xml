@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<table sqlname="sso_role_auth" dummypk="id">
+
+	<column name="id" javatype="java.lang.Integer"/>
+	<column name="role_id" javatype="java.lang.Integer"/>
+	<column name="auth_id" javatype="java.lang.Integer"/>
+
+	<!-- 插入一条纪录 -->
+	<operation name="insert">
+		<sql>
+			<![CDATA[
+				INSERT INTO 
+				sso_role_auth (
+					role_id, 
+					auth_id, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				)
+				VALUES (?, ?, ?, ?, ?, ?);
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				INSERT INTO 
+				sso_role_auth (
+					role_id, 
+					auth_id, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				)
+				VALUES (#roleId#, #authId#, #description#, #lastModifier#, now(), now());
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 删除一条纪录 -->
+	<operation name="delete">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_role_auth
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_role_auth
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 删除一些纪录 -->
+	<operation name="deleteByRoleId">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_role_auth
+				WHERE 
+					role_id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_role_auth
+				WHERE 
+					role_id = #roleId#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过roleId和authId来删除一条纪录 -->
+	<operation name="deleteByRoleIdAndAuthId">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_role_auth
+				WHERE 
+					role_id = ?
+				AND
+					auth_id = ?
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_role_auth
+				WHERE 
+					role_id = #roleId#
+				AND
+					auth_id = #authId#
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 更新一条纪录 -->
+	<operation name="update" paramtype="object">
+		<sql>
+			<![CDATA[
+				UPDATE 
+					sso_role_auth
+				SET
+					role_id = ?, 
+					auth_id = ?, 
+					description = ?, 
+					last_modifier = ?, 
+					gmt_modified = ?
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				UPDATE 
+					sso_role_auth
+				SET
+					role_id = #roleId#, 
+					auth_id = #authId#, 
+					description = #description#, 
+					last_modifier = #lastModifier#,  
+					gmt_modified = now()
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 查询一条纪录 -->
+	<operation name="query">
+		<sql>
+			<![CDATA[
+				SELECT
+					id, 
+					role_id, 
+					auth_id, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_role_auth
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT
+					id, 
+					role_id, 
+					auth_id, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_role_auth
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过roleId查询 -->
+	<operation name="queryByRoleId" multiplicity="many">
+		<sql>
+			<![CDATA[
+				SELECT
+					id, 
+					role_id, 
+					auth_id, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_role_auth
+				WHERE 
+					role_id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT
+					id, 
+					role_id, 
+					auth_id, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_role_auth
+				WHERE 
+					role_id = #roleId#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过authId查询 -->
+	<operation name="queryByAuthId" multiplicity="many">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					role_id, 
+					auth_id, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_role_auth
+				WHERE 
+					auth_id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					role_id, 
+					auth_id, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_role_auth
+				WHERE 
+					auth_id = #authId#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过roleId和authId查询 -->
+	<operation name="queryByRoleIdAndAuthId">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					role_id, 
+					auth_id, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_role_auth
+				WHERE 
+					role_id = ?
+				AND
+					auth_id = ?
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					role_id, 
+					auth_id, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_role_auth
+				WHERE 
+					role_id = #roleId#
+				AND 
+					auth_id = #authId#
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 按照备注来删除纪录，仅用于测试用例中 -->
+	<operation name="deleteByDesc">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_role_auth
+				WHERE 
+					description like ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_role_auth
+				WHERE 
+					description like 
+				CONCAT(CONCAT('%', #description#), '%');
+			]]>
+		</sqlmap>
+	</operation>
+
+</table>

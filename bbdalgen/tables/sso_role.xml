@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<table sqlname="sso_role" dummypk="id">
+
+	<column name="id" javatype="java.lang.Integer" />
+
+	<!-- 插入一条纪录 -->
+	<operation name="insert">
+		<sql>
+			<![CDATA[
+				INSERT INTO 
+				sso_role (
+					role_name, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				)
+				VALUES (?, ?, ?, ?, ?, ?, ?);
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				INSERT INTO 
+				sso_role (
+					role_name, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				)
+				VALUES (#roleName#, #isEnable#, #description#, #lastModifier#, now(), now());
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 删除一条纪录 -->
+	<operation name="delete">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_role
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_role
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 更新一条纪录 -->
+	<operation name="update" paramtype="object">
+		<sql>
+			<![CDATA[
+				UPDATE 
+					sso_role
+				SET
+					role_name = ?, 
+					is_enable = ?, 
+					description = ?, 
+					last_modifier = ?, 
+					gmt_modified = ?
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				UPDATE 
+					sso_role
+				SET
+					role_name = #roleName#, 
+					is_enable = #isEnable#, 
+					description = #description#, 
+					last_modifier = #lastModifier#, 
+					gmt_modified = now()
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 查询一条纪录 -->
+	<operation name="query">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					role_name, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_role
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					role_name, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_role
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过roleName查询 -->
+	<operation name="queryByRoleName">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					role_name, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_role
+				WHERE 
+					role_name = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					role_name, 
+					is_enable, 
+					description, 
+					last_modifier, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_role
+				WHERE 
+					role_name = #roleName#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 模糊查询 -->
+	<operation name="queryByUserName" multiplicity="many">
+		<extraparams>
+			<param name="userName" javatype="java.lang.String"/>
+		</extraparams>
+		<sql>
+			<![CDATA[
+				SELECT
+					b.id AS id,
+					b.role_name AS role_name,
+					b.is_enable AS is_enable,
+					c.description AS description,
+					b.last_modifier AS last_modifier,
+					b.gmt_create AS gmt_create,
+					b.gmt_modified AS gmt_modified
+				FROM
+					sso_user a,
+					sso_role b,
+					sso_user_role c
+				WHERE
+					a.id = c.user_id
+				AND 
+					b.id = c.role_id
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT
+					b.id AS id,
+					b.role_name AS role_name,
+					b.is_enable AS is_enable,
+					c.description AS description,
+					b.last_modifier AS last_modifier,
+					b.gmt_create AS gmt_create,
+					b.gmt_modified AS gmt_modified
+				FROM
+					sso_user a,
+					sso_role b,
+					sso_user_role c
+				WHERE
+					a.id = c.user_id
+				AND 
+					b.id = c.role_id
+				AND 
+					a.user_name = #userName#
+				ORDER BY
+					c.gmt_modified DESC
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 按照备注来删除纪录，仅用于测试用例中 -->
+	<operation name="deleteByDesc">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_role
+				WHERE 
+					description like ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_role
+				WHERE 
+					description like 
+				CONCAT(CONCAT('%', #description#), '%');
+			]]>
+		</sqlmap>
+	</operation>
+
+</table>

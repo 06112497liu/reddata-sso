@@ -1,0 +1,32 @@
+  	  if (this.getPower() == false) {
+#if (${operation.returnTypePrimitive})
+	    ${operation.simpleReturnTypeForPrimitive} retObj = (${operation.simpleReturnTypeForPrimitive}) getSqlMapClientTemplate().queryForObject("${operation.mappedStatementId}", ${paramName});
+
+		if (retObj == null) {
+		    return ${operation.defaultReturnValue};
+		} else {
+		    return retObj.${operation.simpleReturnType}Value();
+		}
+#else
+        return (${operation.simpleReturnType}) getSqlMapClientTemplate().queryForObject("${operation.mappedStatementId}", ${paramName});
+#end
+  	  }
+		${operation.simpleReturnType} opDO = (${operation.simpleReturnType})getSqlMapClientTemplate().queryForObject("${operation.mappedStatementId}", ${paramName});
+		
+		if (opDO == null) {
+		   return opDO;
+		}
+		
+#if(${table.getTableConfig().bIntegrity()} == true)	
+		    methodUtils.compareInteg(opDO);	
+#end
+#if(${table.getTableConfig().bConfidentiality()} == true)
+		  String conf = opDO.get$!{method_getConf}();
+		  if (conf == null) {
+		    logger.warn("���ݿ��иû������ֶ�Ϊ��");
+			return opDO;
+		  }
+		 String bytesToString = methodUtils.getConfEncodedResult(conf);
+		 
+#end          
+      

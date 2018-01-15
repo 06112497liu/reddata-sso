@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<table sqlname="sso_access" dummypk="id">
+
+	<column name="id" javatype="java.lang.Integer" />
+	<column name="user_id" javatype="java.lang.Integer" />
+
+	<!-- 插入一条纪录 -->
+	<operation name="insert">
+		<sql>
+			<![CDATA[
+				INSERT INTO 
+				sso_access (
+					user_id, 
+					token, 
+					valid_date, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				)
+				VALUES (?, ?, ?, ?, ?, ?);
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				INSERT INTO 
+				sso_access (
+					user_id, 
+					token, 
+					valid_date, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				)
+				VALUES (#userId#, #token#, #validDate#, #description#, now(), now());
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 删除一条纪录 -->
+	<operation name="delete">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_access
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_access
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过userId删除一条纪录 -->
+	<operation name="deleteByUserId">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_access
+				WHERE 
+					user_id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_access
+				WHERE 
+					user_id = #userId#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过userId和token删除一条纪录 -->
+	<operation name="deleteByUserIdAndToken">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_access
+				WHERE 
+					user_id = ?
+				AND
+					token = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_access
+				WHERE 
+					user_id = #userId#
+				AND 
+					token = #token#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 更新一条纪录 -->
+	<operation name="update" paramtype="object">
+		<sql>
+			<![CDATA[
+				UPDATE 
+					sso_access
+				SET
+					user_id = ?, 
+					token = ?, 
+					valid_date = ?, 
+					description =?, 
+					gmt_modified  = ?
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				UPDATE 
+					sso_access
+				SET
+					user_id = #userId#, 
+					token = #token#, 
+					valid_date = #validDate#, 
+					description = #description#,
+					gmt_modified  = now()
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 更新一条纪录 -->
+	<operation name="updateValidDate">
+		<sql>
+			<![CDATA[
+				UPDATE 
+					sso_access
+				SET
+					valid_date = ?, 
+					gmt_modified  = ?
+				WHERE 
+					user_id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				UPDATE 
+					sso_access
+				SET
+					valid_date = #validDate#, 
+					gmt_modified  = now()
+				WHERE 
+					user_id = #userId#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 查询一条纪录 -->
+	<operation name="query">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					token, 
+					valid_date, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_access
+				WHERE 
+					id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					token, 
+					valid_date, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_access
+				WHERE 
+					id = #id#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 查询全部纪录 -->
+	<operation name="queryAll" multiplicity="many">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					token, 
+					valid_date, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_access
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					token, 
+					valid_date, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_access
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过userid查询一条纪录 -->
+	<operation name="queryByUserId">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					token, 
+					valid_date, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_access
+				WHERE 
+					user_id = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					token, 
+					valid_date, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_access
+				WHERE 
+					user_id = #userId#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过token查询一条纪录 -->
+	<operation name="queryByToken">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					token, 
+					valid_date, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_access
+				WHERE 
+					token = ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					token, 
+					valid_date, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_access
+				WHERE 
+					token = #token#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过userId和token查询一条纪录 -->
+	<operation name="queryByUserIdAndToken">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					token, 
+					valid_date, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_access
+				WHERE 
+					user_id = ?
+				AND
+					token = ?
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					token, 
+					valid_date, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_access
+				WHERE 
+					user_id = #userId#
+				AND
+					token = #token#;
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过时间来动态查询 -->
+	<operation name="queryByDate" multiplicity="many">
+		<sql>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					token, 
+					valid_date, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_access
+				WHERE 
+					valid_date = ?
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT 
+					id, 
+					user_id, 
+					token, 
+					valid_date, 
+					description, 
+					gmt_create, 
+					gmt_modified
+				FROM
+					sso_access
+				WHERE 
+					1=1
+				<dynamic>
+					<isNotEmpty prepend="AND">
+						valid_date > #validDate#
+					</isNotEmpty>
+				</dynamic>
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 通过userId和token来检查合法性 -->
+	<operation name="checkValid">
+		<extraparams>
+			<param name="userId" javatype="java.lang.String"/>
+		</extraparams>
+		<extraparams>
+			<param name="token" javatype="java.lang.String"/>
+		</extraparams>
+		<sql>
+			<![CDATA[
+				SELECT
+					a.id as id,
+					a.user_id as user_id,
+					a.token as token,
+					a.description as description,
+					a.valid_date as valid_date,
+					a.gmt_create as gmt_create,
+					a.gmt_modified as gmt_modified
+				FROM
+					sso_access a,
+					sso_user b
+				WHERE
+					a.user_id = b.id
+				AND b.is_enable = 1
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT
+					a.id as id,
+					a.user_id as user_id,
+					a.token as token,
+					a.description as description,
+					a.valid_date as valid_date,
+					a.gmt_create as gmt_create,
+					a.gmt_modified as gmt_modified
+				FROM
+					sso_access a,
+					sso_user b
+				WHERE
+					a.user_id = b.id
+				AND b.is_enable = 1
+				AND a.valid_date > now()
+				AND a.user_id = #userId#
+				AND a.token = #token#
+			]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 按照备注来删除纪录，仅用于测试用例中 -->
+	<operation name="deleteByDesc">
+		<sql>
+			<![CDATA[
+				DELETE FROM
+					sso_access
+				WHERE 
+					description like ?;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				DELETE FROM
+					sso_access
+				WHERE 
+					description like 
+				CONCAT(CONCAT('%', #description#), '%');
+			]]>
+		</sqlmap>
+	</operation>
+
+</table>

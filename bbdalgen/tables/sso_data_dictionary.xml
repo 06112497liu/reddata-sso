@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<table sqlname="sso_data_dictionary" dummypk="id">
+	<column name="id" javatype="java.lang.Integer" />
+
+	<!-- 根据type查询纪录 -->
+	<operation name="queryByType">
+		<sql>
+			<![CDATA[
+				SELECT
+					id, 
+					data_code,
+					data_name
+				FROM
+					sso_data_dictionary
+				WHERE 
+					data_type = ?
+				ORDER BY seq_num;
+			]]>
+		</sql>
+		<sqlmap>
+			<![CDATA[
+				SELECT
+					id,
+					data_code,
+					data_name
+				FROM
+					sso_data_dictionary
+				WHERE
+					data_type = #dataType#
+				ORDER BY seq_num;
+			]]>
+		</sqlmap>
+	</operation>
+
+</table>

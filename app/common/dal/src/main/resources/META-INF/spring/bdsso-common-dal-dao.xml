@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="byName">
+    <!-- ======================================================================== -->
+    <!--  DAO                                                                     -->
+    <!-- ======================================================================== -->
+    <bean id="ssoAccessDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoAccessDAO" parent="baseSqlMapClientDAO"/>
+    <bean id="ssoAccountValidDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoAccountValidDAO" parent="baseSqlMapClientDAO"/>
+    <bean id="ssoAppDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoAppDAO" parent="baseSqlMapClientDAO"/>
+    <bean id="ssoAuthDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoAuthDAO" parent="baseSqlMapClientDAO"/>
+    <bean id="ssoAuthResourceDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoAuthResourceDAO" parent="baseSqlMapClientDAO"/>
+    <bean id="ssoCacheManagerDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoCacheManagerDAO" parent="baseSqlMapClientDAO"/>
+    <bean id="ssoDataDictionaryDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoDataDictionaryDAO" parent="baseSqlMapClientDAO"/>
+    <bean id="ssoResourceDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoResourceDAO" parent="baseSqlMapClientDAO"/>
+    <bean id="ssoRoleDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoRoleDAO" parent="baseSqlMapClientDAO"/>
+    <bean id="ssoRoleAuthDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoRoleAuthDAO" parent="baseSqlMapClientDAO"/>
+    <bean id="ssoUserDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoUserDAO" parent="baseSqlMapClientDAO"/>
+    <bean id="ssoUserInfoDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoUserInfoDAO" parent="baseSqlMapClientDAO"/>
+    <bean id="ssoUserRoleDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoUserRoleDAO" parent="baseSqlMapClientDAO"/>
+    <bean id="ssoVisitHistoryDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoVisitHistoryDAO" parent="baseSqlMapClientDAO"/>
+    <bean id="SsoCacheManagerDAO" class="com.bbd.bdsso.common.dal.ibatis.IbatisSsoCacheManagerDAO" parent="baseSqlMapClientDAO"/>
+</beans>
