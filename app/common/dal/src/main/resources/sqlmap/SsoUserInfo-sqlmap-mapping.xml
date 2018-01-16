@@ -90,17 +90,39 @@
 		INNER JOIN
 		sso_role_auth c
 		ON
-		b.role_id = c.auth_id
+		b.role_id = c.role_id
 		INNER JOIN
 		sso_auth_resource d
 		ON
-		c.auth_id = d.resource_id
+		c.auth_id = d.auth_id
 		INNER JOIN
 		sso_resource e
 		ON
 		d.resource_id = e.id
 		WHERE
-		e.resource_name NOT IN ('ABNORAL_IS_ADMIN') AND e.resource_name = 'ABNORAL_ALLOW_FORWARDING'
+		e.resource_name = 'ABNORAL_ALLOW_FORWARDING'
+		AND
+		a.user_id NOT IN (
+		SELECT a.user_id
+		FROM
+		sso_user_info a
+		INNER JOIN
+		sso_user_role b
+		ON
+		a.user_id = b.user_id
+		INNER JOIN
+		sso_role_auth c
+		ON
+		b.role_id = c.role_id
+		INNER JOIN
+		sso_auth_resource d
+		ON
+		c.auth_id = d.auth_id
+		INNER JOIN
+		sso_resource e
+		ON
+		d.resource_id = e.id
+		WHERE e.resource_name ='ABNORAL_IS_ADMIN')
 		<isNotNull prepend="and" property="region">
 			region = #region#
 		</isNotNull>
