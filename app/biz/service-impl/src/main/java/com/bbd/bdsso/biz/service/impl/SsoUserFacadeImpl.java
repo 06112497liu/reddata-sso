@@ -8,10 +8,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.bbd.bdsso.common.dal.daointerface.*;
+import com.bbd.bdsso.common.dal.dataobject.SsoDataDictionaryDO;
 import com.bbd.bdsso.common.dal.dataobject.SsoUserInfoDO;
 import com.bbd.bdsso.common.service.facade.result.*;
+import com.bbd.bdsso.core.service.*;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +46,8 @@ import com.bbd.bdsso.core.service.SsoEncryptService;
 import com.bbd.bdsso.core.service.SsoUserService;
 import com.bbd.commons.lang.util.AssertUtils;
 import com.bbd.commons.lang.util.page.PageList;
+
+import javax.annotation.Resource;
 
 /**
  * 用户服务接口实现
@@ -102,6 +107,9 @@ public class SsoUserFacadeImpl implements SsoUserFacade {
     /** 用户信息DAO */
     @Autowired
     private SsoUserInfoDAO ssoUserInfoDAO;
+
+    @Autowired
+    SsoDataDictionaryService ssoDataDictionaryService;
 
 
     /** 
@@ -443,7 +451,15 @@ public class SsoUserFacadeImpl implements SsoUserFacade {
                 });
 
                 List<SsoUserInfoDO> ssoUserInfoDOS = ssoUserInfoDAO.queryByUserIds(userIds);
-
+                //映射中文字段
+                List<SsoDataDictionaryDO> list = ssoDataDictionaryService.getDataByType("1");
+                Map<String, List<SsoDataDictionaryDO>> collect =
+                        list.stream().collect(Collectors.groupingBy(SsoDataDictionaryDO::getDataCode));
+                ssoUserInfoDOS.forEach((s) ->{
+                    if (collect.containsKey(s.getRegion())){
+                        s.setRegion(collect.get(s.getRegion()).get(0).getDataName());
+                    }
+                });
                 // 设置结果
                 result.setResultList(SsoUserConvertor.convertDos2Vos(listCopy,ssoUserInfoDOS));
                 result.setPageNum(pageList.getPaginator().getPage());
