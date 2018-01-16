@@ -67,27 +67,44 @@
 
     <!-- mapped statement for IbatisSsoUserInfoDAO.queryAll -->
     <select id="MS-SSO-USER-INFO-QUERY-ALL" resultMap="RM-SSO-USER-INFO" >
-        SELECT /*MS-BDSSO-SSO-USER-INFO-QUERY-ALL*/ 
-					id,
-					user_id,
-					pers_id,
-					name,
-					dept_name,
-					region,
-					law_num,
-					duty,
-					card_id,
-					phone,
-					last_modifier, 
-					gmt_create, 
-					gmt_modified
-				FROM
-					sso_user_info
-				WHERE
-					1 = 1
-					<isNotNull prepend="and" property="region">
-						region = #region#
-					</isNotNull>
+		SELECT /*MS-BDSSO-SSO-USER-INFO-QUERY-ALL*/
+		a.id,
+		a.user_id,
+		a.pers_id,
+		a.name,
+		a.dept_name,
+		a.region,
+		a.law_num,
+		a.duty,
+		a.card_id,
+		a.phone,
+		a.last_modifier,
+		a.gmt_create,
+		a.gmt_modified
+		FROM
+		sso_user_info a
+		INNER JOIN
+		sso_user_role b
+		ON
+		a.user_id = b.user_id
+		INNER JOIN
+		sso_role_auth c
+		ON
+		b.role_id = c.auth_id
+		INNER JOIN
+		sso_auth_resource d
+		ON
+		c.auth_id = d.resource_id
+		INNER JOIN
+		sso_resource e
+		ON
+		d.resource_id = e.id
+		WHERE
+		e.resource_name NOT IN ('ABNORAL_IS_ADMIN') AND e.resource_name = 'ABNORAL_ALLOW_FORWARDING'
+		<isNotNull prepend="and" property="region">
+			region = #region#
+		</isNotNull>
+		GROUP BY a.user_id
 
     </select>
 
