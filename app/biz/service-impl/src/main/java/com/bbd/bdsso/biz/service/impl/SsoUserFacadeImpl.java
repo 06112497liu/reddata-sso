@@ -488,8 +488,14 @@ public class SsoUserFacadeImpl implements SsoUserFacade {
 
             @Override
             public void service() {
-                List<SsoUserInfoDO> list = ssoUserInfoDAO.queryAll(region);
-                result.setData(SsoUserConvertor.convertDos2Vos(list));
+                if (null == region){
+                    List<SsoUserInfoDO> list = ssoUserInfoDAO.queryAll();
+                    result.setData(SsoUserConvertor.convertDos2Vos(list));
+                }else {
+                    List<SsoUserInfoDO> list = ssoUserInfoDAO.queryAll(region);
+                    result.setData(SsoUserConvertor.convertDos2Vos(list));
+                }
+
             }
 
         }, result);

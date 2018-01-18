@@ -73,6 +73,8 @@ public interface SsoUserInfoDAO {
 	 */	 
 	List<SsoUserInfoDO> queryAll(String region) throws DataAccessException;
 
+	List<SsoUserInfoDO> queryAll() throws DataAccessException;
+
 	/**
 	 *  Query DB table <tt>sso_user_info</tt> for records.
 	 *

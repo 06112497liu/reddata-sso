@@ -94,9 +94,15 @@ public class IbatisSsoUserInfoDAO extends SqlMapClientDaoSupport implements SsoU
 		Map param = new HashMap();
 
 		param.put("region", region);
-        return getSqlMapClientTemplate().queryForList("MS-SSO-USER-INFO-QUERY-ALL", param);
+        return getSqlMapClientTemplate().queryForList("MS-SSO-USER-INFO-QUERY-ABNORMAL-ALL", param);
 
     }
+
+	public List<SsoUserInfoDO> queryAll() throws DataAccessException {
+
+		return getSqlMapClientTemplate().queryForList("MS-SSO-USER-INFO-QUERY-ALL");
+
+	}
 
 	/**
 	 *  Query DB table <tt>sso_user_info</tt> for records.

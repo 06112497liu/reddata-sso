@@ -66,7 +66,7 @@
     </delete>
 
     <!-- mapped statement for IbatisSsoUserInfoDAO.queryAll -->
-    <select id="MS-SSO-USER-INFO-QUERY-ALL" resultMap="RM-SSO-USER-INFO" >
+    <select id="MS-SSO-USER-INFO-QUERY-ABNORMAL-ALL" resultMap="RM-SSO-USER-INFO" >
 		SELECT /*MS-BDSSO-SSO-USER-INFO-QUERY-ALL*/
 		a.id,
 		a.user_id,
@@ -127,8 +127,33 @@
 			region = #region#
 		</isNotNull>
 		GROUP BY a.user_id
-
     </select>
+
+	<!-- mapped statement for IbatisSsoUserInfoDAO.queryAll -->
+	<select id="MS-SSO-USER-INFO-QUERY-ALL" resultMap="RM-SSO-USER-INFO" >
+		SELECT /*MS-BDSSO-SSO-USER-INFO-QUERY-ALL*/
+		id,
+		user_id,
+		pers_id,
+		name,
+		dept_name,
+		region,
+		law_num,
+		duty,
+		card_id,
+		phone,
+		last_modifier,
+		gmt_create,
+		gmt_modified
+		FROM
+		sso_user_info
+		WHERE
+		1 = 1
+		<isNotNull prepend="and" property="region">
+			region = #region#
+		</isNotNull>
+
+	</select>
 
 	<!-- mapped statement for IbatisSsoUserInfoDAO.queryByUserId -->
 	<select id="MS-SSO-USER-INFO-QUERY-BY-USER-IDS" resultMap="RM-SSO-USER-INFO" >
