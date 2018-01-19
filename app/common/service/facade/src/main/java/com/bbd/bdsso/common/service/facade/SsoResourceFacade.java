@@ -112,4 +112,14 @@ public interface SsoResourceFacade {
     @POST
     @Path("/queryByTicketAndAppName")
     public BdssoBaseAuthResult authByParams(@HeaderParam("ticket") String ticket, @FormParam("appName") String appName);
+
+    /**
+     * 认证某个用户是否具有管理员权限
+     *
+     * @param uid           用户名
+     * @return
+     */
+    @POST
+    @Path("/isAdmin")
+    public BdssoResourceResult isAdmin(@FormParam("uid") String uid);
 }

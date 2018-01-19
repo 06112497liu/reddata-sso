@@ -6,6 +6,7 @@ package com.bbd.bdsso.biz.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -302,4 +303,21 @@ public class SsoResourceFacadeImpl implements SsoResourceFacade {
         return result;
     }
 
+    @Override
+    public BdssoResourceResult isAdmin(String uid) {
+        final BdssoResourceResult result = new BdssoResourceResult();
+        bdssoTransactionTemplate.executeWithoutTransaction(new BdssoCallBack() {
+            @Override
+            public void check() {
+                AssertUtils.assertStringNotBlank(uid, "用户id为空");
+            }
+
+            @Override
+            public void service() {
+                List<SsoResourceDO> list = ssoResourceDAO.queryByUid(uid);
+                result.setResultList(SsoResourceConvertor.convertDos2Vos(list));
+            }
+        }, result);
+        return result;
+    }
 }

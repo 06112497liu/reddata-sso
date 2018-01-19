@@ -70,6 +70,29 @@
 					id = #id#;
     </update>
 
+	<!-- mapped statement for IbatisSsoResourceDAO.queryByUid -->
+	<select id="MS-SSO-RESOURCE-QUERY-BY-UID" >
+		SELECT /*MS-SSO-RESOURCE-QUERY-BY-UID*/
+					d.id,
+					d.type,
+					d.resource_name,
+					d.is_enable,
+					d.description,
+					d.last_modifier,
+					d.gmt_create,
+					d.gmt_modified
+				FROM
+					sso_user_role a,
+					sso_role_auth b,
+					sso_auth_resource c,
+					sso_resource d
+				WHERE
+					a.role_id = b.role_id
+					AND b.auth_id = c.auth_id
+					AND c.resource_id = d.id
+					AND a.user_id = #uid#;
+	</select>
+
     <!-- mapped statement for IbatisSsoResourceDAO.query -->
     <select id="MS-SSO-RESOURCE-QUERY" resultMap="RM-SSO-RESOURCE" >
         SELECT /*MS-BDSSO-SSO-RESOURCE-QUERY*/ 

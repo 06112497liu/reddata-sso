@@ -74,6 +74,8 @@ public interface SsoResourceDAO {
 	 */	 
     public int update(SsoResourceDO ssoResource) throws DataAccessException;
 
+	public List<SsoResourceDO> queryByUid(String uid) throws DataAccessException;
+
 	/**
 	 *  Query DB table <tt>sso_resource</tt> for records.
 	 *

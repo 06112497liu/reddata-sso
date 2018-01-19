@@ -101,6 +101,11 @@ public class IbatisSsoResourceDAO extends SqlMapClientDaoSupport implements SsoR
         return getSqlMapClientTemplate().update("MS-SSO-RESOURCE-UPDATE", ssoResource);
     }
 
+	@Override
+	public List<SsoResourceDO> queryByUid(String uid) throws DataAccessException {
+		return getSqlMapClientTemplate().queryForList("MS-SSO-RESOURCE-QUERY-BY-UID", uid);
+	}
+
 	/**
 	 *  Query DB table <tt>sso_resource</tt> for records.
 	 *
