@@ -49,6 +49,7 @@
 		<velocity_version>1.7</velocity_version>
 		<javax_mail_version>1.5.6</javax_mail_version>
 		<skipTests>true</skipTests>
+		<light_version>3.0.0</light_version>
 	</properties>
 
 	<dependencyManagement>
@@ -419,6 +420,32 @@
 				<artifactId>javax.mail</artifactId>
 				<version>${javax_mail_version}</version>
 			</dependency>
+
+			<!-- light start -->
+			<dependency>
+				<groupId>com.bbd</groupId>
+				<artifactId>light-plugin-servlet</artifactId>
+				<version>${light_version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.bbd</groupId>
+				<artifactId>light-plugin-mysql</artifactId>
+				<version>${light_version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.bbd</groupId>
+				<artifactId>light-plugin-dubbo</artifactId>
+				<version>${light_version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.bbd</groupId>
+				<artifactId>light-plugin-log4j</artifactId>
+				<version>${light_version}</version>
+			</dependency>
+			<!-- light end -->
 			
 		</dependencies>
 	</dependencyManagement>

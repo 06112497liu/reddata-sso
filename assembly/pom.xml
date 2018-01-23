@@ -26,6 +26,16 @@
 			<groupId>com.bbd.reddata-sso</groupId>
 			<artifactId>bdsso-biz-service-impl</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.bbd</groupId>
+			<artifactId>light-plugin-log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.bbd</groupId>
+			<artifactId>light-plugin-mysql</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<!-- profiles -->
