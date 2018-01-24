@@ -129,7 +129,7 @@
 		GROUP BY a.user_id
     </select>
 
-	<!-- mapped statement for IbatisSsoUserInfoDAO.queryAll -->
+	<!-- mapped statement for IbatisSsoUserInfoDAO.queryOpinionAll -->
 	<select id="MS-SSO-USER-INFO-QUERY-OPINION-ALL" resultMap="RM-SSO-USER-INFO" >
 		SELECT /*MS-SSO-USER-INFO-QUERY-OPINION-ALL*/
 				a.id,
