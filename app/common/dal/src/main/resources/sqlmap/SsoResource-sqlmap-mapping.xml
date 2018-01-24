@@ -71,7 +71,7 @@
     </update>
 
 	<!-- mapped statement for IbatisSsoResourceDAO.queryByUid -->
-	<select id="MS-SSO-RESOURCE-QUERY-BY-UID" >
+	<select id="MS-SSO-RESOURCE-QUERY-BY-UID"  resultMap="RM-SSO-RESOURCE">
 		SELECT /*MS-SSO-RESOURCE-QUERY-BY-UID*/
 					d.id,
 					d.type,
