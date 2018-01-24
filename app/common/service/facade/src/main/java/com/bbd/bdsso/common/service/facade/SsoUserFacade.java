@@ -4,19 +4,11 @@
  */
 package com.bbd.bdsso.common.service.facade;
 
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-
 import com.bbd.bdsso.common.service.facade.result.*;
 import com.bbd.bdsso.common.service.facade.util.ContentType;
 import com.bbd.bdsso.common.service.facade.vo.SsoUserVO;
 
-import java.util.List;
+import javax.ws.rs.*;
 
 /**
  * 用户服务接口
@@ -148,6 +140,14 @@ public interface SsoUserFacade {
     @POST
     @Path("/findUserByRegion")
     public BdssoUserInfosResult findUserByRegion(@FormParam("region") String region);
+
+    /**
+     * 根据区域查询舆情用户，如果区域为null则查询全部
+     * @return
+     */
+    @POST
+    @Path("/findOpinionUserByRegion")
+    public BdssoUserInfosResult findOpinionUserByRegion(@FormParam("region") String region);
     /**
      * 更新密码
      * 

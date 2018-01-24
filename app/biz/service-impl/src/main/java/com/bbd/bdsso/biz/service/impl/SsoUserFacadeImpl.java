@@ -4,50 +4,38 @@
  */
 package com.bbd.bdsso.biz.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
+import com.bbd.bdsso.biz.service.impl.aop.AuthValidate;
+import com.bbd.bdsso.biz.service.impl.template.BdssoCallBack;
+import com.bbd.bdsso.biz.service.impl.template.BdssoTemplate;
 import com.bbd.bdsso.common.dal.daointerface.*;
 import com.bbd.bdsso.common.dal.dataobject.SsoDataDictionaryDO;
+import com.bbd.bdsso.common.dal.dataobject.SsoUserDO;
 import com.bbd.bdsso.common.dal.dataobject.SsoUserInfoDO;
+import com.bbd.bdsso.common.dal.dataobject.SsoUserRoleDO;
+import com.bbd.bdsso.common.dal.manual.daointerface.ExtraSsoUserDAO;
+import com.bbd.bdsso.common.service.facade.SsoUserFacade;
 import com.bbd.bdsso.common.service.facade.result.*;
+import com.bbd.bdsso.common.service.facade.vo.SsoUserVO;
+import com.bbd.bdsso.common.util.EncryptUtils;
+import com.bbd.bdsso.common.util.SsoConstant;
+import com.bbd.bdsso.common.util.SsoStringUtils;
+import com.bbd.bdsso.common.util.enums.*;
+import com.bbd.bdsso.common.util.exception.BdssoBaseException;
+import com.bbd.bdsso.core.model.EmailValidateModel;
+import com.bbd.bdsso.core.model.convertor.SsoUserConvertor;
 import com.bbd.bdsso.core.service.*;
+import com.bbd.commons.lang.util.AssertUtils;
+import com.bbd.commons.lang.util.page.PageList;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.bbd.bdsso.biz.service.impl.aop.AuthValidate;
-import com.bbd.bdsso.biz.service.impl.template.BdssoCallBack;
-import com.bbd.bdsso.biz.service.impl.template.BdssoTemplate;
-import com.bbd.bdsso.common.dal.dataobject.SsoUserDO;
-import com.bbd.bdsso.common.dal.dataobject.SsoUserRoleDO;
-import com.bbd.bdsso.common.dal.manual.daointerface.ExtraSsoUserDAO;
-import com.bbd.bdsso.common.service.facade.SsoUserFacade;
-import com.bbd.bdsso.common.service.facade.vo.SsoUserVO;
-import com.bbd.bdsso.common.util.EncryptUtils;
-import com.bbd.bdsso.common.util.SsoConstant;
-import com.bbd.bdsso.common.util.SsoStringUtils;
-import com.bbd.bdsso.common.util.enums.AuthCodeEnum;
-import com.bbd.bdsso.common.util.enums.AuthTypeEnum;
-import com.bbd.bdsso.common.util.enums.BdssoResultEnum;
-import com.bbd.bdsso.common.util.enums.IsEnableEnum;
-import com.bbd.bdsso.common.util.enums.RoleEnum;
-import com.bbd.bdsso.common.util.enums.VerifyCodeTypeEnum;
-import com.bbd.bdsso.common.util.exception.BdssoBaseException;
-import com.bbd.bdsso.core.model.EmailValidateModel;
-import com.bbd.bdsso.core.model.convertor.SsoUserConvertor;
-import com.bbd.bdsso.core.service.SsoAccessService;
-import com.bbd.bdsso.core.service.SsoEmailService;
-import com.bbd.bdsso.core.service.SsoEncryptService;
-import com.bbd.bdsso.core.service.SsoUserService;
-import com.bbd.commons.lang.util.AssertUtils;
-import com.bbd.commons.lang.util.page.PageList;
-
-import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 用户服务接口实现
@@ -500,6 +488,25 @@ public class SsoUserFacadeImpl implements SsoUserFacade {
 
         }, result);
 
+        return result;
+    }
+
+    @Override
+    @AuthValidate(type = AuthTypeEnum.NO)
+    public BdssoUserInfosResult findOpinionUserByRegion(String region) {
+        final BdssoUserInfosResult result = new BdssoUserInfosResult();
+
+        bdssoTransactionTemplate.executeWithTransaction(new BdssoCallBack() {
+
+            @Override
+            public void check() {
+            }
+            @Override
+            public void service() {
+                List<SsoUserInfoDO> list = ssoUserInfoDAO.queryOpinionAll(region);
+                result.setData(SsoUserConvertor.convertDos2Vos(list));
+            }
+        }, result);
         return result;
     }
 

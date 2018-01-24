@@ -304,6 +304,7 @@ public class SsoResourceFacadeImpl implements SsoResourceFacade {
     }
 
     @Override
+    @AuthValidate(type = AuthTypeEnum.NO)
     public BdssoResourceResult isAdmin(String uid) {
         final BdssoResourceResult result = new BdssoResourceResult();
         bdssoTransactionTemplate.executeWithoutTransaction(new BdssoCallBack() {

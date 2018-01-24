@@ -104,6 +104,11 @@ public class IbatisSsoUserInfoDAO extends SqlMapClientDaoSupport implements SsoU
 
 	}
 
+	@Override
+	public List<SsoUserInfoDO> queryOpinionAll(String region) throws DataAccessException {
+		return getSqlMapClientTemplate().queryForList("MS-SSO-USER-INFO-QUERY-OPINION-ALL");
+	}
+
 	/**
 	 *  Query DB table <tt>sso_user_info</tt> for records.
 	 *
