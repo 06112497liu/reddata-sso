@@ -129,6 +129,41 @@
 		GROUP BY a.user_id
     </select>
 
+	<!-- mapped statement for IbatisSsoUserInfoDAO.queryOpinionAll -->
+	<select id="MS-SSO-USER-INFO-QUERY-OPINION-ALL" resultMap="RM-SSO-USER-INFO" >
+		SELECT /*MS-SSO-USER-INFO-QUERY-OPINION-ALL*/
+				a.id,
+				a.user_id,
+				a.pers_id,
+				a.name,
+				a.dept_name,
+				a.region,
+				a.law_num,
+				a.duty,
+				a.card_id,
+				a.phone,
+				a.last_modifier,
+				a.gmt_create,
+				a.gmt_modified
+		FROM
+				sso_user_info a,
+				sso_user_role b,
+				sso_role_auth c,
+				sso_auth_resource d,
+				sso_resource e
+		WHERE
+				a.user_id = b.user_id
+				AND b.role_id = c.role_id
+				AND c.auth_id = d.auth_id
+				AND d.resource_id = e.id
+				<isNotNull prepend="and" property="region">
+					a.region = #region#
+				</isNotNull>
+				AND e.resource_name LIKE 'OPINION_%'
+		GROUP BY
+				a.user_id
+	</select>
+
 	<!-- mapped statement for IbatisSsoUserInfoDAO.queryAll -->
 	<select id="MS-SSO-USER-INFO-QUERY-ALL" resultMap="RM-SSO-USER-INFO" >
 		SELECT /*MS-BDSSO-SSO-USER-INFO-QUERY-ALL*/
