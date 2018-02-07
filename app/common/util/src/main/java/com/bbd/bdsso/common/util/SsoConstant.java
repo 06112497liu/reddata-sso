@@ -13,7 +13,7 @@ package com.bbd.bdsso.common.util;
 public class SsoConstant {
 
     /** token有效期，单位：毫秒 */
-    public static final int    TOKEN_VALID_DURATION                     = 15 * 60 * 1000;
+    public static final int    TOKEN_VALID_DURATION                     = 30 * 60 * 1000;
 
     /** 验证码有效期，单位：毫秒 */
     public static final int    VERIFY_CODE_VALID_DURATION               = 30 * 60 * 1000;
