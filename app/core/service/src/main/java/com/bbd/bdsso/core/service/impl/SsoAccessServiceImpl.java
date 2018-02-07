@@ -97,7 +97,12 @@ public class SsoAccessServiceImpl implements SsoAccessService {
         AssertUtils.assertStringNotBlank(userId, SsoConstant.INVALID_TICKET);
         AssertUtils.assertStringNotBlank(token, SsoConstant.INVALID_TICKET);
         SsoAccessDO ssoAccessDO = ssoAccessDAO.checkValid(userId, token);
-        return (null == ssoAccessDO) ? false : true;
+        if (null == ssoAccessDO) {
+            return false;
+        } else {
+            updateToken(userId);
+            return true;
+        }
     }
 
     /** 
