@@ -39,9 +39,9 @@
 			<artifactId>bdsso-core-model</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>com.bbd</groupId>
-			<artifactId>light-plugin-dubbo</artifactId>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>com.bbd</groupId>-->
+			<!--<artifactId>light-plugin-dubbo</artifactId>-->
+		<!--</dependency>-->
 	</dependencies>
 </project>
