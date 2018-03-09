@@ -16,7 +16,7 @@
             <fileMode>0644</fileMode>
         </fileSet>
         <fileSet>
-            <directory>${project.basedir}\src\bin</directory>
+            <directory>${project.build.directory}/dubbo/META-INF/assembly/bin</directory>
             <outputDirectory>bin</outputDirectory>
             <fileMode>0755</fileMode>
         </fileSet>
